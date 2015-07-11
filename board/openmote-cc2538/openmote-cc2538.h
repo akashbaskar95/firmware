@@ -14,26 +14,26 @@
 
 /*================================ include ==================================*/
 
-#include "Board.h"
-#include "Gpio.h"
-#include "I2c.h"
-#include "Radio.h"
-#include "RadioTimer.h"
-#include "SleepTimer.h"
-#include "Spi.h"
-#include "Timer.h"
-#include "Uart.h"
-#include "Watchdog.h"
-
-#include "Adxl346.h"
-#include "Max44009.h"
-#include "Sht21.h"
-
-#include "Tps62730.h"
-#include "Enc28j60.h"
-
 #include "cc2538_include.h"
 #include "cc2538_types.h"
+
+#include "Board.h"
+#include "Gpio.h"
+// #include "I2c.h"
+// #include "Radio.h"
+// #include "RadioTimer.h"
+// #include "SleepTimer.h"
+// #include "Spi.h"
+// #include "Timer.h"
+// #include "Uart.h"
+// #include "Watchdog.h"
+
+// #include "Adxl346.h"
+// #include "Max44009.h"
+// #include "Sht21.h"
+
+// #include "Tps62730.h"
+// #include "Enc28j60.h"
 
 /*================================ define ===================================*/
 
@@ -171,10 +171,10 @@
 
 // Board management
 extern Board board;
-extern Watchdog watchdog;
+// extern Watchdog watchdog;
 
 // Step-down DC/DC converter
-extern Tps62730 tps62730;
+// extern Tps62730 tps62730;
 
 // Debug pins
 extern GpioOut debug_ad0;
@@ -191,44 +191,44 @@ extern GpioOut led_yellow;
 extern GpioInPow button_user;
 
 // Antenna
-extern GpioOut antenna_external;
-extern GpioOut antenna_internal;
+// extern GpioOut antenna_external;
+// extern GpioOut antenna_internal;
 
 // Timer
-extern Timer timer0;
-extern Timer timer1;
-extern Timer timer2;
-extern Timer timer3;
+// extern Timer timer0;
+// extern Timer timer1;
+// extern Timer timer2;
+// extern Timer timer3;
 
 // SleepTimer
-extern SleepTimer sleepTimer;
+// extern SleepTimer sleepTimer;
 
 // RadioTimer
-extern RadioTimer radioTimer;
+// extern RadioTimer radioTimer;
 
 // I2C peripheral
-extern I2c i2c;
+// extern I2c i2c;
 
 // SPI peripheral
-extern Spi spi;
+// extern Spi spi;
 
 // UART peripheral
-extern Uart uart;
+// extern Uart uart;
 
 // IEEE 802.15.4 radio
-extern Radio radio;
+// extern Radio radio;
 
 // Acceleration sensor
-extern Adxl346 adxl346;
+// extern Adxl346 adxl346;
 
 // Light sensor
-extern Max44009 max44009;
+// extern Max44009 max44009;
 
 // Temperature + Relative humidity sensor
-extern Sht21 sht21;
+// extern Sht21 sht21;
 
 // Ethernet PHY + MAC chip
-extern Enc28j60 enc28j60;
+// extern Enc28j60 enc28j60;
 
 /*=============================== prototypes ================================*/
 

@@ -1,23 +1,36 @@
 ###############################################################################
 
-# Define the FreeRTOS name and path
-FREERTOS_NAME = freertos
-FREERTOS_PATH = $(KERNEL_PATH)/$(FREERTOS_NAME)
+# Check if CPU has been defined
+ifndef CPU
+$(error Error! Variable CPU is not set.)
+endif
+
+# Check if CPU points to a valid target
+ifeq "$(wildcard $(KERNEL_PATH)/$(CPU))" ""
+$(error Error! Variable CPU is not valid.)
+endif
 
 ###############################################################################
+
+# Define the Library path
+KERNEL_SRC    = $(KERNEL_PATH)/$(CPU)
+KERNEL_COMMON = $(KERNEL_PATH)/common
+KERNEL_INC    = $(KERNEL_PATH)/inc
 
 # Append to the source and include paths
-INC_PATH += -I $(FREERTOS_PATH)
-
-###############################################################################
+INC_PATH += -I $(KERNEL_SRC)
+INC_PATH += -I $(KERNEL_INC)
+INC_PATH += -I $(KERNEL_COMMON)
 
 # Extend the virtual path
-VPATH += $(FREERTOS_PATH)
+VPATH += $(KERNEL_SRC) $(KERNEL_INC) $(KERNEL_COMMON)
 
 ###############################################################################
 
-# Include the Makefiles in the FreeRTOS subdirectory
-include $(FREERTOS_PATH)/Makefile.include
+# Include the Makefiles in the various subdirectories in the current folder
+include $(KERNEL_SRC)/Makefile.include
+include $(KERNEL_COMMON)/Makefile.include
 
 ###############################################################################
+
 

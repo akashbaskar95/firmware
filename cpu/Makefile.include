@@ -1,0 +1,32 @@
+###############################################################################
+
+# Check if TARGET has been defined
+ifndef TARGET
+$(error Error! Variable TARGET is not set.)
+endif
+
+# Check if TARGET points to a valid target
+ifeq "$(wildcard $(CPU_PATH)/$(TARGET))" ""
+$(error Error! Variable TARGET is not valid.)
+endif
+
+###############################################################################
+
+# Define the Library path
+CPU_SRC = $(CPU_PATH)/$(TARGET)
+CPU_INC = $(CPU_PATH)/inc
+
+# Append to the source and include paths
+INC_PATH += -I $(CPU_SRC)
+INC_PATH += -I $(CPU_INC)
+
+# Extend the virtual path
+VPATH += $(CPU_SRC) $(CPU_INC)
+
+###############################################################################
+
+# Include the Makefiles in the various subdirectories in the current folder
+include $(CPU_SRC)/Makefile.include
+
+###############################################################################
+
