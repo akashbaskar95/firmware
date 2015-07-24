@@ -14,26 +14,26 @@
 
 /*================================ include ==================================*/
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "Board.h"
 #include "Gpio.h"
-// #include "I2c.h"
-// #include "Radio.h"
+#include "I2c.h"
+#include "Radio.h"
 // #include "RadioTimer.h"
 // #include "SleepTimer.h"
-// #include "Spi.h"
+#include "Spi.h"
 // #include "Timer.h"
-// #include "Uart.h"
+#include "Uart.h"
 // #include "Watchdog.h"
 
-// #include "Adxl346.h"
-// #include "Max44009.h"
-// #include "Sht21.h"
+#include "Adxl346.h"
+#include "Max44009.h"
+#include "Sht21.h"
 
-// #include "Tps62730.h"
-// #include "Enc28j60.h"
+#include "Tps62730.h"
+#include "Enc28j60.h"
 
 /*================================ define ===================================*/
 
@@ -174,7 +174,7 @@ extern Board board;
 // extern Watchdog watchdog;
 
 // Step-down DC/DC converter
-// extern Tps62730 tps62730;
+extern Tps62730 tps62730;
 
 // Debug pins
 extern GpioOut debug_ad0;
@@ -207,28 +207,28 @@ extern GpioInPow button_user;
 // extern RadioTimer radioTimer;
 
 // I2C peripheral
-// extern I2c i2c;
+extern I2c i2c;
 
 // SPI peripheral
-// extern Spi spi;
+extern Spi spi;
 
 // UART peripheral
-// extern Uart uart;
+extern Uart uart;
 
 // IEEE 802.15.4 radio
-// extern Radio radio;
+extern Radio radio;
 
 // Acceleration sensor
-// extern Adxl346 adxl346;
+extern Adxl346 adxl346;
 
 // Light sensor
-// extern Max44009 max44009;
+extern Max44009 max44009;
 
 // Temperature + Relative humidity sensor
-// extern Sht21 sht21;
+extern Sht21 sht21;
 
 // Ethernet PHY + MAC chip
-// extern Enc28j60 enc28j60;
+extern Enc28j60 enc28j60;
 
 /*=============================== prototypes ================================*/
 
