@@ -11,8 +11,8 @@
 
 /*================================ include ==================================*/
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "Gpio.h"
 
@@ -26,11 +26,11 @@
 
 /*================================= public ==================================*/
 
-GpioOut::GpioOut(Gpio_TypeDef& gpio):
+GpioOut::GpioOut(const Gpio_TypeDef& gpio):
     Gpio(gpio)
 {
     // Set the pin as output
-    GPIOPinTypeGPIOOutput(gpio.port, gpio.pin);
+    GPIOPinTypeGPIOOutput(gpio_.port, gpio_.pin);
 
     // Set the pin low
     GPIOPinWrite(gpio_.port, gpio_.pin, 0);

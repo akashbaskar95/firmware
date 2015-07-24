@@ -11,8 +11,8 @@
 
 /*================================ include ==================================*/
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "Gpio.h"
 
@@ -26,7 +26,7 @@
 
 /*================================= public ==================================*/
 
-GpioInPow::GpioInPow(Gpio_TypeDef& gpio):
+GpioInPow::GpioInPow(const Gpio_TypeDef& gpio):
     GpioIn(gpio)
 {
     // Set the pin as input

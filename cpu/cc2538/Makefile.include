@@ -1,8 +1,13 @@
 ###############################################################################
 
-# Define the Platform path
-LIBCC2538_SRC = $(CPU_SRC)/libcc2538/src
-LIBCC2538_INC = $(CPU_SRC)/libcc2538/inc
+# Define the CC2538 library
+LIBCC2538_NAME   = libcc2538
+LIBCC2538_LIB    = $(LIBCC2538_NAME).a
+LIBCC2538_PATH   = $(CPU_SRC)/$(LIBCC2538_NAME)
+LIBCC2538_SRC    = $(LIBCC2538_PATH)/src
+LIBCC2538_INC    = $(LIBCC2538_PATH)/inc
+LIBCC2538_PYTHON = python
+LIBCC2538_SCRIPT = $(LIBCC2538_NAME).py
 
 # Append to the include path
 INC_PATH += -I $(LIBCC2538_SRC)
@@ -10,9 +15,6 @@ INC_PATH += -I $(LIBCC2538_INC)
 
 # Extend the virtual path
 VPATH += $(LIBCC2538_SRC) $(LIBCC2538_INC)
-
-# Include the Makefiles in the various subdirectories in the current folder
-# include $(LIBCC2538_SRC)/Makefile.include
 
 ###############################################################################
 
@@ -60,8 +62,8 @@ MAKEFLAGS = -j1
 #              Uart.cpp I2c.cpp Spi.cpp Timer.cpp GpioPwm.cpp Radio.cpp Watchdog.cpp \
 #              SysTick.cpp SleepTimer.cpp RadioTimer.cpp
 
-SRC_FILES += Board.cpp Gpio.cpp GpioOut.cpp GpioIn.cpp GpioInPow.cpp \
-             InterruptHandler.cpp
+SRC_FILES += Board.cpp Gpio.cpp GpioAdc.cpp GpioIn.cpp GpioInPow.cpp GpioOut.cpp \
+             GpioUart.cpp GpioI2c.cpp GpioSpi.cpp InterruptHandler.cpp I2c.cpp Radio.cpp Spi.cpp Uart.cpp
 
 # Append the startup code to the files to compile
 SRC_FILES += cc2538_startup.c cc2538_system.c
@@ -72,15 +74,6 @@ LINKER_SCRIPT = $(CPU_SRC)/cc2538_linker.lds
 # Linker directories and libraries
 LINKER_DIRS += -L$(CPU_SRC)
 LINKER_LIBS += -lcc2538
-
-###############################################################################
-
-LIBCC2538     = libcc2538.a
-
-# Check if TARGET points to a valid target
-ifeq "$(wildcard $(CPU_SRC)/$(LIBCC2538))" ""
-$(error Error! $(LIBCC2538) does not exist.)
-endif
 
 ###############################################################################
 
@@ -120,7 +113,17 @@ BSL_EXT    = hex
 
 ###############################################################################
 
-.PHONY: jlink load debug bsl
+.PHONY: libcc2538 jlink load debug bsl
+
+check:
+# Check if LIBCC2537 exists
+ifeq ("$(wildcard $(CPU_SRC)/$(LIBCC2538_LIB))","")
+	$(error "Error! $(LIBCC2538_LIB) does not exist. Please run 'make BOARD=OpenMote-cc2538 libcc2538'" to generate it)
+endif
+
+libcc2538:
+	@echo "Generating the CC2538 library..."
+	@cd $(LIBCC2538_PATH); $(LIBCC2538_PYTHON) $(LIBCC2538_SCRIPT)
 
 jlink:
 	@echo "Initializing Segger J-Link..."

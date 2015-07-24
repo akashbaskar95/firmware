@@ -21,11 +21,12 @@ typedef struct Gpio_TypeDef Gpio_TypeDef;
 class Gpio
 {
 public:
-    Gpio(Gpio_TypeDef& gpio);
+    Gpio(const Gpio_TypeDef& gpio);
     uint32_t getPort(void);
     uint32_t getPin(void);
+    uint32_t getIoc(void);
 protected:
-    Gpio_TypeDef& gpio_;
+    const Gpio_TypeDef& gpio_;
 };
 
 /*****************************************************************************/
@@ -36,7 +37,7 @@ class GpioIn : public Gpio
 friend class InterruptHandler;
 
 public:
-    GpioIn(Gpio_TypeDef& gpio);
+    GpioIn(const Gpio_TypeDef& gpio);
     bool read(void);
     void setCallback(Callback* callback);
     void clearCallback(void);
@@ -53,7 +54,7 @@ protected:
 class GpioOut : public Gpio
 {
 public:
-    GpioOut(Gpio_TypeDef& gpio);
+    GpioOut(const Gpio_TypeDef& gpio);
     void on(void);
     void off(void);
     void toggle(void);
@@ -65,7 +66,7 @@ public:
 class GpioInPow : public GpioIn
 {
 public:
-    GpioInPow(Gpio_TypeDef& gpio);
+    GpioInPow(const Gpio_TypeDef& gpio);
     void enableInterrupts(void);
     void disableInterrupts(void);
 };
@@ -75,7 +76,7 @@ public:
 class GpioAdc : public Gpio
 {
 public:
-    GpioAdc(Gpio_TypeDef& gpio);
+    GpioAdc(const Gpio_TypeDef& gpio);
     void init(uint32_t resolution, uint32_t reference);
     uint32_t read(void);
 };
@@ -85,7 +86,7 @@ public:
 class GpioI2c : public Gpio
 {
 public:
-    GpioI2c(Gpio_TypeDef& gpio);
+    GpioI2c(const Gpio_TypeDef& gpio);
 };
 
 /*****************************************************************************/
@@ -93,8 +94,7 @@ public:
 class GpioSpi : public Gpio
 {
 public:
-    GpioSpi(Gpio_TypeDef& gpio);
-    uint32_t getIoc(void);
+    GpioSpi(const Gpio_TypeDef& gpio);
     void high(void);
     void low(void);
 };
@@ -104,7 +104,7 @@ public:
 class GpioPwm : public Gpio
 {
 public:
-    GpioPwm(Gpio_TypeDef& gpio);
+    GpioPwm(const Gpio_TypeDef& gpio);
 };
 
 /*****************************************************************************/
@@ -112,8 +112,7 @@ public:
 class GpioUart : public Gpio
 {
 public:
-    GpioUart(Gpio_TypeDef& gpio);
-    uint32_t getIoc(void);
+    GpioUart(const Gpio_TypeDef& gpio);
 };
 
 /*****************************************************************************/

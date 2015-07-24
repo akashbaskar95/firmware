@@ -11,10 +11,11 @@
 
 /*================================ include ==================================*/
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Board.h"
 #include "I2c.h"
-
-#include "cc2538_include.h"
 
 /*================================ define ===================================*/
 
@@ -31,8 +32,8 @@ const uint32_t I2C_MAX_DELAY_TICKS = I2C_MAX_DELAY_US / Board::BOARD_TICKS_PER_U
 
 /*================================= public ==================================*/
 
-I2c::I2c(uint32_t peripheral, GpioI2c& scl, GpioI2c& sda):
-    peripheral_(peripheral), scl_(scl), sda_(sda)
+I2c::I2c(I2c_TypeDef& i2c, GpioI2c& scl, GpioI2c& sda):
+    i2c_(i2c), scl_(scl), sda_(sda)
 {
 }
 
@@ -44,12 +45,12 @@ void I2c::enable(uint32_t clock)
     clock_ = clock;
 
     // Enable peripheral except in deep sleep modes (e.g. LPM1, LPM2, LPM3)
-    SysCtrlPeripheralEnable(peripheral_);
-    SysCtrlPeripheralSleepEnable(peripheral_);
-    SysCtrlPeripheralDeepSleepDisable(peripheral_);
+    SysCtrlPeripheralEnable(i2c_.peripheral);
+    SysCtrlPeripheralSleepEnable(i2c_.peripheral);
+    SysCtrlPeripheralDeepSleepDisable(i2c_.peripheral);
 
     // Reset peripheral previous to configuring it
-    SysCtrlPeripheralReset(peripheral_);
+    SysCtrlPeripheralReset(i2c_.peripheral);
 
     // Configure the SCL pin
     GPIOPinTypeI2C(scl_.getPort(), scl_.getPin());

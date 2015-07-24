@@ -1,5 +1,5 @@
 /**
- * @file       cc2538_types.h
+ * @file       cpu_types.h
  * @author     Pere Tuset-Peiro (peretuset@openmote.com)
  * @version    v0.1
  * @date       May, 2015
@@ -9,8 +9,8 @@
  *             This file is licensed under the GNU General Public License v2.
  */
 
-#ifndef CC2538_TYPES_H_
-#define CC2538_TYPES_H_
+#ifndef CPU_TYPES_H_
+#define CPU_TYPES_H_
 
 /*================================ include ==================================*/
 
@@ -18,15 +18,52 @@
 
 /*================================ typedef ==================================*/
 
-typedef uint32_t GPIO_Port_Typedef;
-typedef uint32_t GPIO_Pin_Typedef;
-typedef uint32_t GPIO_Edge_Typedef;
+typedef uint32_t Gpio_Port_TypeDef;
+typedef uint32_t Gpio_Pin_TypeDef;
+typedef uint32_t Gpio_Edge_TypeDef;
+typedef uint32_t Gpio_Ioc_TypeDef;
+typedef uint32_t Gpio_Adc_TypeDef;
 
 struct Gpio_TypeDef
 {
-    GPIO_Port_Typedef port;
-    GPIO_Pin_Typedef  pin;
-    GPIO_Edge_Typedef edge;
+    Gpio_Port_TypeDef port;
+    Gpio_Pin_TypeDef  pin;
+    Gpio_Edge_TypeDef edge;
+    Gpio_Ioc_TypeDef  ioc;
+    Gpio_Adc_TypeDef  adc;
+};
+
+typedef uint32_t I2c_Periph_TypeDef;
+
+struct I2c_TypeDef
+{
+    I2c_Periph_TypeDef peripheral;
+};
+
+typedef uint32_t Spi_Periph_TypeDef;
+typedef uint32_t Spi_Base_TypeDef;
+typedef uint32_t Spi_Clock_TypeDef;
+typedef uint32_t Spi_Interrupt_TypeDef;
+
+struct Spi_TypeDef
+{
+    Spi_Periph_TypeDef    peripheral;
+    Spi_Base_TypeDef      base;
+    Spi_Clock_TypeDef     clock;
+    Spi_Interrupt_TypeDef interrupt;
+};
+
+typedef uint32_t Uart_Periph_TypeDef;
+typedef uint32_t Uart_Base_TypeDef;
+typedef uint32_t Uart_Clock_TypeDef;
+typedef uint32_t Uart_Interrupt_TypeDef;
+
+struct Uart_TypeDef
+{
+    Uart_Periph_TypeDef    peripheral;
+    Uart_Base_TypeDef      base;
+    Uart_Clock_TypeDef     clock;
+    Uart_Interrupt_TypeDef interrupt;
 };
 
 /**
@@ -50,4 +87,4 @@ enum SleepMode : uint32_t {
 
 /*================================ private ==================================*/
 
-#endif  /* CC2538_TYPES_H_ */
+#endif  /* CPU_TYPES_H_ */

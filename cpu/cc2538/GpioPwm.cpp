@@ -11,9 +11,10 @@
 
 /*================================ include ==================================*/
 
-#include "Gpio.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
-#include "cc2538_include.h"
+#include "Gpio.h"
 
 /*================================ define ===================================*/
 
@@ -25,8 +26,8 @@
 
 /*================================= public ==================================*/
 
-GpioPwm::GpioPwm(uint32_t port, uint8_t pin):
-    Gpio(port, pin)
+GpioPwm::GpioPwm(Gpio_TypeDef& gpio):
+    gpio_(gpio)
 {
 }
 

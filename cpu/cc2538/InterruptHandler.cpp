@@ -11,18 +11,17 @@
 
 /*================================ include ==================================*/
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
-
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "InterruptHandler.h"
 
 #include "Gpio.h"
 // #include "Timer.h"
-// #include "Uart.h"
-// #include "I2c.h"
-// #include "Spi.h"
-// #include "Radio.h"
+#include "Uart.h"
+#include "I2c.h"
+#include "Spi.h"
+#include "Radio.h"
 // #include "SleepTimer.h"
 // #include "RadioTimer.h"
 // #include "SysTick.h"
@@ -48,17 +47,17 @@ GpioIn* InterruptHandler::GPIOD_interruptVector_[8];
 // SleepTimer* InterruptHandler::SleepTimer_interruptVector_;
 // RadioTimer* InterruptHandler::RadioTimer_interruptVector_;
 
-// Uart* InterruptHandler::UART0_interruptVector_;
-// Uart* InterruptHandler::UART1_interruptVector_;
+Uart* InterruptHandler::UART0_interruptVector_;
+Uart* InterruptHandler::UART1_interruptVector_;
 
-// I2c* InterruptHandler::I2C_interruptVector_;
+I2c* InterruptHandler::I2C_interruptVector_;
 
-// Spi* InterruptHandler::SPI0_interruptVector_;
-// Spi* InterruptHandler::SPI1_interruptVector_;
+Spi* InterruptHandler::SPI0_interruptVector_;
+Spi* InterruptHandler::SPI1_interruptVector_;
 
 // SysTick* InterruptHandler::SysTick_interruptVector_;
 
-// Radio* InterruptHandler::Radio_interruptVector_;
+Radio* InterruptHandler::Radio_interruptVector_;
 
 /*=============================== prototypes ================================*/
 
@@ -304,6 +303,7 @@ void InterruptHandler::clearInterruptHandler(Timer* timer_)
         }
     }
 }
+*/
 
 void InterruptHandler::setInterruptHandler(Uart * uart_)
 {
@@ -393,6 +393,7 @@ void InterruptHandler::clearInterruptHandler(Radio * radio_)
     Radio_interruptVector_ = nullptr;
 }
 
+/*
 void InterruptHandler::setInterruptHandler(SleepTimer * sleepTimer_)
 {
     SleepTimer_interruptVector_ = sleepTimer_;
@@ -412,7 +413,6 @@ void InterruptHandler::clearInterruptHandler(RadioTimer * radioimer_)
 {
     RadioTimer_interruptVector_ = nullptr;
 }
-
 */
 
 /*=============================== protected =================================*/
@@ -445,19 +445,19 @@ InterruptHandler::InterruptHandler()
     // TimerIntRegister(GPTIMER3_BASE, GPTIMER_BOTH, TIMER3_InterruptHandler);
 
     // Register the UARTx interrupt handlers
-    // UARTIntRegister(UART0_BASE, UART0_InterruptHandler);
-    // UARTIntRegister(UART1_BASE, UART1_InterruptHandler);
+    UARTIntRegister(UART0_BASE, UART0_InterruptHandler);
+    UARTIntRegister(UART1_BASE, UART1_InterruptHandler);
 
     // Register the I2C interrupt handler
-    // I2CIntRegister(I2C_InterruptHandler);
+    I2CIntRegister(I2C_InterruptHandler);
 
     // Register the SPIx interrupt handler
-    // SSIIntRegister(SSI0_BASE, SPI0_InterruptHandler);
-    // SSIIntRegister(SSI1_BASE, SPI1_InterruptHandler);
+    SSIIntRegister(SSI0_BASE, SPI0_InterruptHandler);
+    SSIIntRegister(SSI1_BASE, SPI1_InterruptHandler);
 
     // Register the RF CORE and ERROR interrupt handlers
-    // IntRegister(INT_RFCORERTX, RFCore_InterruptHandler);
-    // IntRegister(INT_RFCOREERR, RFError_InterruptHandler);
+    IntRegister(INT_RFCORERTX, RFCore_InterruptHandler);
+    IntRegister(INT_RFCOREERR, RFError_InterruptHandler);
 
     // Register the SleepTimer interrupt handler
     // SleepModeIntRegister(SleepTimer_InterruptHandler);
@@ -794,6 +794,7 @@ inline void InterruptHandler::TIMER3_InterruptHandler(void)
         TIMER3_interruptVector_[1]->interruptHandler();
     }
 }
+*/
 
 inline void InterruptHandler::UART0_InterruptHandler(void)
 {
@@ -825,11 +826,13 @@ inline void InterruptHandler::SPI1_InterruptHandler(void)
     SPI1_interruptVector_->interruptHandler();
 }
 
+/*
 inline void InterruptHandler::SysTick_InterruptHandler(void)
 {
     // Call the SPI interrupt handler
     SysTick_interruptVector_->interruptHandler();
 }
+*/
 
 inline void InterruptHandler::RFCore_InterruptHandler(void)
 {
@@ -843,6 +846,7 @@ inline void InterruptHandler::RFError_InterruptHandler(void)
     Radio_interruptVector_->errorHandler();
 }
 
+/*
 inline void InterruptHandler::SleepTimer_InterruptHandler(void)
 {
     // Call the SleepTimer interrupt handler
@@ -854,5 +858,5 @@ inline void InterruptHandler::RadioTimer_InterruptHandler(void)
     // Call the RadioTimer interrupt handler
     RadioTimer_interruptVector_->interruptHandler();
 }
-
 */
+

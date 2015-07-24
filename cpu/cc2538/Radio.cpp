@@ -11,10 +11,11 @@
 
 /*================================ include ==================================*/
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Radio.h"
 #include "InterruptHandler.h"
-
-#include "cc2538_include.h"
 
 /*================================ define ===================================*/
 

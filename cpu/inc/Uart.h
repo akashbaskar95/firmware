@@ -26,8 +26,8 @@ class Uart
 friend class InterruptHandler;
 
 public:
-    Uart(uint32_t peripheral, uint32_t base, uint32_t clock, uint32_t interrupt, GpioUart& rx, GpioUart& tx);
-    uint32_t getBase(void);
+    Uart(Uart_TypeDef& uart, GpioUart& rx, GpioUart& tx);
+    Uart_Base_TypeDef getBase(void);
     void rxUnlockFromInterrupt(void) {rxMutex_.giveFromInterrupt();}
     void txUnlockFromInterrupt(void) {txMutex_.giveFromInterrupt();}
     void enable(uint32_t baudrate, uint32_t config, uint32_t mode);
@@ -51,10 +51,8 @@ private:
     void interruptHandlerRx(void);
     void interruptHandlerTx(void);
 private:
-    uint32_t peripheral_;
-    uint32_t base_;
-    uint32_t clock_;
-    uint32_t interrupt_;
+    Uart_TypeDef& uart_;
+    
     uint32_t mode_;
     uint32_t config_;
     uint32_t baudrate_;

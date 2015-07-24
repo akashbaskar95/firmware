@@ -11,9 +11,10 @@
 
 /*================================ include ==================================*/
 
-#include "Gpio.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
-#include "cc2538_include.h"
+#include "Gpio.h"
 
 /*================================ define ===================================*/
 
@@ -25,25 +26,20 @@
 
 /*================================= public ==================================*/
 
-GpioSpi::GpioSpi(uint32_t port, uint8_t pin, uint32_t ioc):
-    Gpio(port, pin), ioc_(ioc)
+GpioSpi::GpioSpi(const Gpio_TypeDef& gpio):
+    Gpio(gpio)
 {
-    GPIOPinTypeGPIOOutput(port_, pin_);
-}
-
-uint32_t GpioSpi::getIoc(void)
-{
-    return ioc_;
+    GPIOPinTypeGPIOOutput(gpio_.port, gpio_.pin);
 }
 
 void GpioSpi::high(void)
 {
-    GPIOPinWrite(port_, pin_, pin_);
+    GPIOPinWrite(gpio_.port, gpio_.pin, gpio_.pin);
 }
 
 void GpioSpi::low(void)
 {
-    GPIOPinWrite(port_, pin_, 0);
+    GPIOPinWrite(gpio_.port, gpio_.pin, 0);
 }
 
 /*=============================== protected =================================*/

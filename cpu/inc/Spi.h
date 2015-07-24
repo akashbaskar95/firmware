@@ -14,11 +14,14 @@
 
 #include <stdint.h>
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Gpio.h"
 #include "Callback.h"
 #include "Mutex.h"
 
-class Gpio;
+class GpioSpi;
 
 class Spi
 {
@@ -26,9 +29,8 @@ class Spi
 friend class InterruptHandler;
 
 public:
-    Spi(uint32_t peripheral, uint32_t base, uint32_t clock, \
-        GpioSpi& miso, GpioSpi& mosi, GpioSpi& clk, GpioSpi& ncs);
-    uint32_t getBase(void);
+    Spi(Spi_TypeDef& spi, GpioSpi& miso, GpioSpi& mosi, GpioSpi& clk, GpioSpi& ncs);
+    Spi_Base_TypeDef getBase(void);
     void enable(uint32_t mode, uint32_t protocol, uint32_t datawidth, uint32_t baudrate);
     void sleep(void);
     void wakeup(void);
@@ -48,10 +50,8 @@ private:
     void interruptHandlerRx();
     void interruptHandlerTx();
 private:
-    uint32_t peripheral_;
-    uint32_t base_;
-    uint32_t clock_;
-    uint32_t interrupt_;
+    Spi_TypeDef& spi_;
+    
     uint32_t mode_;
     uint32_t protocol_;
     uint32_t baudrate_;

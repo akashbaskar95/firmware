@@ -13,8 +13,8 @@
 
 #include <string.h>
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "Board.h"
 #include "Gpio.h"

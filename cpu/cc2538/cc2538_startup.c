@@ -13,7 +13,7 @@
 
 #include <stdint.h>
 
-#include "cc2538_include.h"
+#include "cpu_include.h"
 
 /*================================ define ===================================*/
 
@@ -61,6 +61,42 @@ extern void xPortSysTickHandler(void);
 
 void NMI_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
 void HardFault_Handler(void)    __attribute__ ((weak, alias("Default_Handler")));
+void MemManage_Handler(void)    __attribute__ ((weak, alias("Default_Handler")));
+void BusFault_Handler(void)     __attribute__ ((weak, alias("Default_Handler")));
+void UsageFault_Handler(void)   __attribute__ ((weak, alias("Default_Handler")));
+void DebugMon_Handler(void)     __attribute__ ((weak, alias("Default_Handler")));
+void SVC_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
+void PendSV_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void SysTick_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void GPIO_A_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void GPIO_B_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void GPIO_C_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void GPIO_D_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void UART0_Handler(void)        __attribute__ ((weak, alias("Default_Handler")));
+void UART1_Handler(void)        __attribute__ ((weak, alias("Default_Handler")));
+void SSI0_Handler(void)         __attribute__ ((weak, alias("Default_Handler")));
+void I2C_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
+void ADC0_Handler(void)         __attribute__ ((weak, alias("Default_Handler")));
+void Watchdog_Handler(void)     __attribute__ ((weak, alias("Default_Handler")));
+void Timer0A_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer0B_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer1A_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer1B_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer2A_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer2B_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Analog_Handler(void)       __attribute__ ((weak, alias("Default_Handler")));
+void Radio_Handler(void)        __attribute__ ((weak, alias("Default_Handler")));
+void RadioError_Handler(void)   __attribute__ ((weak, alias("Default_Handler")));
+void AES_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
+void PKA_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
+void SleepTimer_Handler(void)   __attribute__ ((weak, alias("Default_Handler")));
+void MacTimer_Handler(void)     __attribute__ ((weak, alias("Default_Handler")));
+void SSI1_Handler(void)         __attribute__ ((weak, alias("Default_Handler")));
+void Timer3A_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void Timer3B_Handler(void)      __attribute__ ((weak, alias("Default_Handler")));
+void USB_Handler(void)          __attribute__ ((weak, alias("Default_Handler")));
+void uDMA_Handler(void)         __attribute__ ((weak, alias("Default_Handler")));
+void uDMAError_Handler(void)    __attribute__ ((weak, alias("Default_Handler")));
 
 /*=============================== variables =================================*/
 
@@ -94,54 +130,54 @@ __attribute__ ((section(".vectors"), used))
 void (* const interrupt_vector[])(void) =
 {
    (void (*)(void))((uint32_t)&_stack + sizeof(_stack)), // Stack pointer
-   Reset_Handler,                                        // Reset handler
-   NMI_Handler,                                          // The NMI handler
-   HardFault_Handler,                                    // The hard fault handler
-   Default_Handler,                                      // 4 The MPU fault handler
-   Default_Handler,                                      // 5 The bus fault handler
-   Default_Handler,                                      // 6 The usage fault handler
+   Reset_Handler,                                        // 1 Reset handler
+   NMI_Handler,                                          // 2 The NMI handler
+   HardFault_Handler,                                    // 3 The hard fault handler
+   MemManage_Handler,                                    // 4 The MPU fault handler
+   BusFault_Handler,                                     // 5 The bus fault handler
+   UsageFault_Handler,                                   // 6 The usage fault handler
    0, 0, 0, 0,                                           // 7-10 Reserved
    vPortSVCHandler,                                      // 11 SVCall handler
-   Default_Handler,                                      // 12 Debug monitor handler
+   DebugMon_Handler,                                     // 12 Debug monitor handler
    0,                                                    // 13 Reserved
    xPortPendSVHandler,                                   // 14 The PendSV handler
    xPortSysTickHandler,                                  // 15 The SysTick handler
-   Default_Handler,                                      // 16 GPIO Port A
-   Default_Handler,                                      // 17 GPIO Port B
-   Default_Handler,                                      // 18 GPIO Port C
-   Default_Handler,                                      // 19 GPIO Port D
+   GPIO_A_Handler,                                       // 16 GPIO Port A
+   GPIO_B_Handler,                                       // 17 GPIO Port B
+   GPIO_C_Handler,                                       // 18 GPIO Port C
+   GPIO_D_Handler,                                       // 19 GPIO Port D
    0,                                                    // 20 Reserved
-   Default_Handler,                                      // 21 UART0 Rx and Tx
-   Default_Handler,                                      // 22 UART1 Rx and Tx
-   Default_Handler,                                      // 23 SSI0 Rx and Tx
-   Default_Handler,                                      // 24 I2C Master and Slave
+   UART0_Handler,                                        // 21 UART0 Rx and Tx
+   UART1_Handler,                                        // 22 UART1 Rx and Tx
+   SSI0_Handler,                                         // 23 SSI0 Rx and Tx
+   I2C_Handler,                                          // 24 I2C Master and Slave
    0, 0, 0, 0, 0,                                        // 25-29 Reserved
-   Default_Handler,                                      // 30 ADC Sequence 0
+   ADC0_Handler,                                         // 30 ADC Sequence 0
    0, 0, 0,                                              // 31-33 Reserved
-   Default_Handler,                                      // 34 Watchdog timer, timer 0
-   Default_Handler,                                      // 35 Timer 0 subtimer A
-   Default_Handler,                                      // 36 Timer 0 subtimer B
-   Default_Handler,                                      // 37 Timer 1 subtimer A
-   Default_Handler,                                      // 38 Timer 1 subtimer B
-   Default_Handler,                                      // 39 Timer 2 subtimer A
-   Default_Handler,                                      // 40 Timer 2 subtimer B
-   Default_Handler,                                      // 41 Analog Comparator 0
-   Default_Handler,                                      // 42 RFCore Rx/Tx
-   Default_Handler,                                      // 43 RFCore Error
+   Watchdog_Handler,                                     // 34 Watchdog timer
+   Timer0A_Handler,                                      // 35 Timer 0 subtimer A
+   Timer0B_Handler,                                      // 36 Timer 0 subtimer B
+   Timer1A_Handler,                                      // 37 Timer 1 subtimer A
+   Timer1B_Handler,                                      // 38 Timer 1 subtimer B
+   Timer2A_Handler,                                      // 39 Timer 2 subtimer A
+   Timer2B_Handler,                                      // 40 Timer 2 subtimer B
+   Analog_Handler,                                       // 41 Analog Comparator 0
+   Radio_Handler,                                        // 42 RFCore Rx/Tx
+   RadioError_Handler,                                   // 43 RFCore Error
    Default_Handler,                                      // 44 IcePick
    Default_Handler,                                      // 45 FLASH Control
-   Default_Handler,                                      // 46 AES
-   Default_Handler,                                      // 47 PKA
-   Default_Handler,                                      // 48 Sleep Timer
-   Default_Handler,                                      // 49 MacTimer
-   Default_Handler,                                      // 50 SSI1 Rx and Tx
-   Default_Handler,                                      // 51 Timer 3 subtimer A
-   Default_Handler,                                      // 52 Timer 3 subtimer B
+   AES_Handler,                                          // 46 AES
+   PKA_Handler,                                          // 47 PKA
+   SleepTimer_Handler,                                   // 48 Sleep Timer
+   MacTimer_Handler,                                     // 49 MacTimer
+   SSI1_Handler,                                         // 50 SSI1 Rx and Tx
+   Timer3A_Handler,                                      // 51 Timer 3 subtimer A
+   Timer3B_Handler,                                      // 52 Timer 3 subtimer B
    0, 0, 0, 0, 0, 0, 0,                                  // 53-59 Reserved
-   Default_Handler,                                      // 60 USB
+   USB_Handler,                                          // 60 USB
    0,                                                    // 61 Reserved
-   Default_Handler,                                      // 62 uDMA
-   Default_Handler,                                      // 63 uDMA Error
+   uDMA_Handler,                                         // 62 uDMA
+   uDMAError_Handler,                                    // 63 uDMA Error
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                         // 64-73 Reserved
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                         // 74-83 Reserved
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                         // 84-93 Reserved
@@ -152,13 +188,13 @@ void (* const interrupt_vector[])(void) =
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                         // 134-143 Reserved
    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                         // 144-143 Reserved
    0, 0,                                                 // 154-155 Reserved
-   Default_Handler,                                      // 156 USB
-   Default_Handler,                                      // 157 RFCORE RX/TX
-   Default_Handler,                                      // 158 RFCORE Error
-   Default_Handler,                                      // 159 AES
-   Default_Handler,                                      // 160 PKA
-   Default_Handler,                                      // 161 SMTimer
-   Default_Handler                                       // 162 MACTimer
+   USB_Handler,                                          // 156 USB
+   Radio_Handler,                                        // 157 RFCORE RX/TX
+   RadioError_Handler,                                   // 158 RFCORE Error
+   AES_Handler,                                          // 159 AES
+   PKA_Handler,                                          // 160 PKA
+   SleepTimer_Handler,                                   // 161 SMTimer
+   MacTimer_Handler                                      // 162 MACTimer
 };
 
 /*================================= public ==================================*/

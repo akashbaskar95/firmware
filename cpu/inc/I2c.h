@@ -20,13 +20,15 @@
 
 class Gpio;
 
+struct I2c_TypeDef;
+
 class I2c
 {
 
 friend class InterruptHandler;
 
 public:
-    I2c(uint32_t peripheral, GpioI2c& scl, GpioI2c& sda);
+    I2c(I2c_TypeDef& i2c, GpioI2c& scl, GpioI2c& sda);
     void enable(uint32_t clock = 100000);
     void sleep(void);
     void wakeup(void);
@@ -40,7 +42,7 @@ public:
 protected:
     void interruptHandler(void);
 private:
-    uint32_t peripheral_;
+    I2c_TypeDef&     i2c_;
     uint32_t clock_;
 
     Mutex mutex_;

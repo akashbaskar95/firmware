@@ -11,27 +11,28 @@
 
 /*================================ include ==================================*/
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "RadioTimer.h"
 #include "InterruptHandler.h"
-
-#include "cc2538_include.h"
 
 /*================================ define ===================================*/
 
 #define RADIOTIMER_32MHZ_TO_32KHZ_TICKS     ( 976 )
 
 #define MTMSEL                              ( 0x07 )
-#define MTMSEL_TIMER                        (( 0x00 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL ) //*
+#define MTMSEL_TIMER                        (( 0x00 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL )
 #define MTMSEL_CAPTURE                      (( 0x01 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL )
-#define MTMSEL_PERIOD                       (( 0x02 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL ) //*
+#define MTMSEL_PERIOD                       (( 0x02 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL )
 #define MTMSEL_COMPARE1                     (( 0x03 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL )
 #define MTMSEL_COMPARE2                     (( 0x04 << RFCORE_SFR_MTMSEL_MTMSEL_S ) & MTMSEL )
 
 #define MTMOVFSEL                           ( 0x70 )
-#define MTMOVFSEL_TIMER                     (( 0x00 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL ) //*
+#define MTMOVFSEL_TIMER                     (( 0x00 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL )
 #define MTMOVFSEL_CAPTURE                   (( 0x01 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL )
-#define MTMOVFSEL_PERIOD                    (( 0x02 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL ) //*
-#define MTMOVFSEL_COMPARE1                  (( 0x03 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL ) //*
+#define MTMOVFSEL_PERIOD                    (( 0x02 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL )
+#define MTMOVFSEL_COMPARE1                  (( 0x03 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL )
 #define MTMOVFSEL_COMPARE2                  (( 0x04 << RFCORE_SFR_MTMSEL_MTMOVFSEL_S ) & MTMOVFSEL )
 
 /*================================ typedef ==================================*/

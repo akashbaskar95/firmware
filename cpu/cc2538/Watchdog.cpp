@@ -11,9 +11,10 @@
 
 /*================================ include ==================================*/
 
-#include "Watchdog.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
-#include "cc2538_include.h"
+#include "Watchdog.h"
 
 /*================================ define ===================================*/
 

@@ -11,8 +11,8 @@
 
 /*================================ include ==================================*/
 
-#include "cc2538_include.h"
-#include "cc2538_types.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
 #include "Gpio.h"
 
@@ -26,14 +26,9 @@
 
 /*================================= public ==================================*/
 
-GpioUart::GpioUart(Gpio_TypeDef& gpio):
-    gpio_(gpio)
+GpioUart::GpioUart(const Gpio_TypeDef& gpio):
+    Gpio(gpio)
 {
-}
-
-uint32_t GpioUart::getIoc(void)
-{
-    return ioc_;
 }
 
 /*=============================== protected =================================*/
