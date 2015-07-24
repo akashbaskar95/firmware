@@ -31,6 +31,10 @@ DRIVERS_PATH = $(PROJECT_HOME)/$(DRIVERS_NAME)
 KERNEL_NAME = kernel
 KERNEL_PATH = $(PROJECT_HOME)/$(KERNEL_NAME)
 
+# Define the net subdirectory
+NET_NAME = net
+NET_PATH = $(PROJECT_HOME)/$(NET_NAME)
+
 # Define the sys subdirectory
 SYS_NAME = sys
 SYS_PATH = $(PROJECT_HOME)/$(SYS_NAME)
@@ -91,6 +95,13 @@ ifeq ($(USE_KERNEL), TRUE)
 endif
 
 # Decide if we need to include the sys makefile
+ifeq ($(USE_NET), TRUE)
+    include $(NET_PATH)/Makefile.include
+    INC_PATH += -I $(NET_PATH)
+    VPATH += $(NET_PATH)
+endif
+
+# Decide if we need to include the sys makefile
 ifeq ($(USE_SYS), TRUE)
     include $(SYS_PATH)/Makefile.include
     INC_PATH += -I $(SYS_PATH)
@@ -102,7 +113,7 @@ endif
 .DEFAULT_GOAL = all
 
 .PHONY: all
-all: pre build post stats
+all: check pre build post stats
 
 pre:
 	@echo "Building '$(PROJECT_NAME)' project..."
