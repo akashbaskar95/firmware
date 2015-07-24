@@ -14,6 +14,9 @@
 
 #include <stdint.h>
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Uart.h"
 
 #include "CircularBuffer.h"

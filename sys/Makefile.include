@@ -1,34 +1,12 @@
 ###############################################################################
 
-# Decide if we need to include the kernel makefile
-ifeq ($(USE_ETHERNET), TRUE)
-    ETHERNET_NAME = ethernet
-    ETHERNET_PATH = $(SYS_PATH)/$(ETHERNET_NAME)
-    INC_PATH += -I $(ETHERNET_PATH)
-    VPATH += $(ETHERNET_PATH)
-    include $(ETHERNET_PATH)/Makefile.include
-endif
-
-###############################################################################
-
-# Decide if we need to include the kernel makefile
-ifeq ($(USE_IEEE802154), TRUE)
-    IEEE802154_NAME = ieee802154
-    IEEE802154_PATH = $(SYS_PATH)/$(IEEE802154_NAME)
-    INC_PATH += -I $(IEEE8021   54_PATH)
-    VPATH += $(IEEE802154_PATH)
-    include $(IEEE802154_PATH)/Makefile.include
-endif
-
-###############################################################################
-
-# Decide if we need to include the kernel makefile
-ifeq ($(USE_OPENDQ), TRUE)
-    OPENDQ_NAME = opendq
-    OPENDQ_PATH = $(SYS_PATH)/$(OPENDQ_NAME)
-    INC_PATH += -I $(OPENDQ_PATH)
-    VPATH += $(OPENDQ_PATH)
-    include $(OPENDQ_PATH)/Makefile.include    
+# Decide if we need to include the sys makefile
+ifeq ($(USE_SYS), TRUE)
+    SYS_SRC = $(SYS_PATH)/src
+    SYS_INC = $(SYS_PATH)/inc
+    INC_PATH += -I $(SYS_INC)
+    VPATH += $(SYS_SRC) $(SYS_INC)
+    include $(SYS_SRC)/Makefile.include
 endif
 
 ###############################################################################

@@ -12,6 +12,9 @@
 #ifndef SNIFFER_COMMON_H_
 #define SNIFFER_COMMON_H_
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Board.h"
 #include "Callback.h"
 #include "Mutex.h"

@@ -1,0 +1,32 @@
+###############################################################################
+
+ETHERNET_NAME = ethernet
+ETHERNET_PATH = $(NET_PATH)/$(ETHERNET_NAME)
+INC_PATH += -I $(ETHERNET_PATH)
+VPATH += $(ETHERNET_PATH)
+ifeq ($(USE_ETHERNET), TRUE)
+    include $(ETHERNET_PATH)/Makefile.include
+endif
+
+###############################################################################
+
+IEEE802154_NAME = ieee802154
+IEEE802154_PATH = $(NET_PATH)/$(IEEE802154_NAME)
+INC_PATH += -I $(IEEE802154_PATH)
+VPATH += $(IEEE802154_PATH)
+ifeq ($(USE_IEEE802154), TRUE)
+    include $(IEEE802154_PATH)/Makefile.include
+endif
+
+###############################################################################
+
+OPENDQ_NAME = opendq
+OPENDQ_PATH = $(NET_PATH)/$(OPENDQ_NAME)
+INC_PATH += -I $(OPENDQ_PATH)
+VPATH += $(OPENDQ_PATH)
+ifeq ($(USE_OPENDQ), TRUE)
+    include $(OPENDQ_PATH)/Makefile.include
+endif
+
+###############################################################################
+
