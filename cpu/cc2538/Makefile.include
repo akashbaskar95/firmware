@@ -18,6 +18,11 @@ VPATH += $(LIBCC2538_SRC) $(LIBCC2538_INC)
 
 ###############################################################################
 
+# Define options passed to the C compiler
+DOPTIONS += -DNO_CLOCK_DIVIDER_RESTORE
+
+###############################################################################
+
 # C compiling flags
 CFLAGS += -mthumb -mcpu=cortex-m3 -mlittle-endian
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing

@@ -53,11 +53,6 @@ Gpio_TypeDef gpio_enc28j60_data = {ENC28J60_INT_PORT, ENC28J60_INT_PIN, ENC28J60
 Board board;
 // Watchdog watchdog(WATCHDOG_INTERVAL);
 
-// Step-down DC/DC converter
-GpioOut bypass(bypass_data);
-GpioIn status(status_data);
-Tps62730 tps62730(bypass, status);
-
 // Debug pins
 GpioOut debug_ad0(debug_ad0_data);
 GpioOut debug_ad1(debug_ad1_data);
@@ -104,22 +99,37 @@ Uart uart(uart_data, gpio_uart_rx, gpio_uart_tx);
 // IEEE 802.15.4 radio
 Radio radio;
 
+// Step-down DC/DC converter
+#ifdef USE_DRIVER_TPS62730
+GpioOut bypass(bypass_data);
+GpioIn status(status_data);
+Tps62730 tps62730(bypass, status);
+#endif
+
 // Acceleration sensor
+#ifdef USE_DRIVER_ADXL346
 Gpio_TypeDef gpio_adxl346_data = {ADXL346_INT_PORT, ADXL346_INT_PIN, ADXL346_INT_EDGE};
 GpioInPow adxl346_int(gpio_adxl346_data);
 Adxl346 adxl346(i2c, adxl346_int);
+#endif
 
 // Light sensor
+#ifdef USE_DRIVER_MAX44009
 Gpio_TypeDef gpio_max44009_data = {MAX44009_INT_PORT, MAX44009_INT_PIN, MAX44009_INT_EDGE};
 GpioIn max44009_int(gpio_max44009_data);
 Max44009 max44009(i2c, max44009_int);
+#endif
 
 // Temperature + Relative humidity sensor
+#ifdef USE_DRIVER_SHT21
 Sht21 sht21(i2c);
+#endif
 
 // Ethernet PHY + MAC chip
+#ifdef USE_DRIVER_ENC28J60
 GpioIn enc28j60_int(gpio_enc28j60_data);
 Enc28j60 enc28j60(spi, enc28j60_int);
+#endif
 
 /*=============================== prototypes ================================*/
 

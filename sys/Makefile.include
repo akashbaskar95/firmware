@@ -1,13 +1,13 @@
 ###############################################################################
 
 # Decide if we need to include the sys makefile
-ifeq ($(USE_SYS), TRUE)
-    SYS_SRC = $(SYS_PATH)/src
-    SYS_INC = $(SYS_PATH)/inc
-    INC_PATH += -I $(SYS_INC)
-    VPATH += $(SYS_SRC) $(SYS_INC)
-    include $(SYS_SRC)/Makefile.include
-endif
+SYS_SRC = $(SYS_PATH)/src
+SYS_INC = $(SYS_PATH)/inc
+INC_PATH += -I $(SYS_INC)
+VPATH += $(SYS_SRC) $(SYS_INC)
+# ifeq ($(USE_SYS), TRUE)
+include $(SYS_SRC)/Makefile.include
+# endif
 
 ###############################################################################
 

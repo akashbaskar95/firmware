@@ -9,17 +9,8 @@ PROJECT_HOME = ../..
 # Include the current path
 INC_PATH += -I $(PROJECT_DIR)
 
-# Define options passed to the C compiler
-DOPTIONS += -DNO_CLOCK_DIVIDER_RESTORE
-
 # Configure compiling
-USE_BOARD = TRUE
-USE_CORE = TRUE
-USE_CPU = TRUE
-USE_DRIVERS = TRUE
-USE_KERNEL = TRUE
-USE_NET = TRUE
-USE_SYS = FALSE
+USE_DRIVER_TPS62730 = TRUE
 
 # Include the Makefile in the root directory
 include $(PROJECT_HOME)/Makefile.include

@@ -60,53 +60,53 @@ BIN_TARGET = $(addprefix $(BIN_PATH)/, $(BIN_FILES))
 ###############################################################################
 
 # Include the board makefiles
-ifeq ($(USE_BOARD), TRUE)
-    include $(BOARD_PATH)/Makefile.include
-    INC_PATH += -I $(BOARD_PATH)
-    VPATH += $(BOARD_PATH)
-endif
+# ifeq ($(USE_BOARD), TRUE)
+include $(BOARD_PATH)/Makefile.include
+INC_PATH += -I $(BOARD_PATH)
+VPATH += $(BOARD_PATH)
+# endif
 
 # Include the cpu makefiles
-ifeq ($(USE_CPU), TRUE)
-    include $(CPU_PATH)/Makefile.include
-    INC_PATH += -I $(CPU_PATH)
-    VPATH += $(CPU_PATH)
-endif
+# ifeq ($(USE_CPU), TRUE)
+include $(CPU_PATH)/Makefile.include
+INC_PATH += -I $(CPU_PATH)
+VPATH += $(CPU_PATH)
+# endif
 
 # Include the core makefiles
-ifeq ($(USE_CORE), TRUE)
-    include $(CORE_PATH)/Makefile.include
-    INC_PATH += -I $(CORE_PATH)
-    VPATH += $(CORE_PATH)
-endif
+# ifeq ($(USE_CORE), TRUE)
+include $(CORE_PATH)/Makefile.include
+INC_PATH += -I $(CORE_PATH)
+VPATH += $(CORE_PATH)
+# endif
 
 # Include the drivers makefiles
-ifeq ($(USE_DRIVERS), TRUE)
-    include $(DRIVERS_PATH)/Makefile.include
-    INC_PATH += -I $(DRIVERS_PATH)
-    VPATH += $(DRIVERS_PATH)
-endif
+# ifeq ($(USE_DRIVERS), TRUE)
+include $(DRIVERS_PATH)/Makefile.include
+INC_PATH += -I $(DRIVERS_PATH)
+VPATH += $(DRIVERS_PATH)
+# endif
 
 # Decide if we need to include the kernel makefile
-ifeq ($(USE_KERNEL), TRUE)
-    include $(KERNEL_PATH)/Makefile.include
-    INC_PATH += -I $(KERNEL_PATH)
-    VPATH += $(KERNEL_PATH)
-endif
+# ifeq ($(USE_KERNEL), TRUE)
+include $(KERNEL_PATH)/Makefile.include
+INC_PATH += -I $(KERNEL_PATH)
+VPATH += $(KERNEL_PATH)
+# endif
+
+# Decide if we need to include the net makefile
+#ifeq ($(USE_NET), TRUE)
+include $(NET_PATH)/Makefile.include
+INC_PATH += -I $(NET_PATH)
+VPATH += $(NET_PATH)
+# endif
 
 # Decide if we need to include the sys makefile
-ifeq ($(USE_NET), TRUE)
-    include $(NET_PATH)/Makefile.include
-    INC_PATH += -I $(NET_PATH)
-    VPATH += $(NET_PATH)
-endif
-
-# Decide if we need to include the sys makefile
-ifeq ($(USE_SYS), TRUE)
-    include $(SYS_PATH)/Makefile.include
-    INC_PATH += -I $(SYS_PATH)
-    VPATH += $(SYS_PATH)
-endif
+# ifeq ($(USE_SYS), TRUE)
+include $(SYS_PATH)/Makefile.include
+INC_PATH += -I $(SYS_PATH)
+VPATH += $(SYS_PATH)
+# endif
 
 ###############################################################################
 

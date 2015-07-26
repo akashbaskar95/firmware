@@ -1,13 +1,13 @@
 ###############################################################################
 
 # Decide if we need to include the kernel makefile
-ifeq ($(USE_CORE), TRUE)
-    CORE_SRC = $(CORE_PATH)/src
-    CORE_INC = $(CORE_PATH)/inc
-    INC_PATH += -I $(CORE_INC)
-    VPATH += $(CORE_SRC) $(CORE_INC)
-    include $(CORE_SRC)/Makefile.include
-endif
+# ifeq ($(USE_CORE), TRUE)
+CORE_SRC = $(CORE_PATH)/src
+CORE_INC = $(CORE_PATH)/inc
+INC_PATH += -I $(CORE_INC)
+VPATH += $(CORE_SRC) $(CORE_INC)
+include $(CORE_SRC)/Makefile.include
+# endif
 
 ###############################################################################
 

@@ -1,30 +1,42 @@
 ###############################################################################
 
+ifndef USE_NET_ETHERNET
+USE_NET_ETHERNET = FALSE
+endif
+
 ETHERNET_NAME = ethernet
 ETHERNET_PATH = $(NET_PATH)/$(ETHERNET_NAME)
 INC_PATH += -I $(ETHERNET_PATH)
 VPATH += $(ETHERNET_PATH)
-ifeq ($(USE_ETHERNET), TRUE)
+ifeq ($(USE_NET_ETHERNET), TRUE)
     include $(ETHERNET_PATH)/Makefile.include
 endif
 
 ###############################################################################
 
+ifndef USE_NET_IEEE802154
+USE_NET_IEEE802154 = FALSE
+endif
+
 IEEE802154_NAME = ieee802154
 IEEE802154_PATH = $(NET_PATH)/$(IEEE802154_NAME)
 INC_PATH += -I $(IEEE802154_PATH)
 VPATH += $(IEEE802154_PATH)
-ifeq ($(USE_IEEE802154), TRUE)
+ifeq ($(USE_NET_IEEE802154), TRUE)
     include $(IEEE802154_PATH)/Makefile.include
 endif
 
 ###############################################################################
 
+ifndef USE_NET_OPENDQ
+USE_NET_OPENDQ = FALSE
+endif
+
 OPENDQ_NAME = opendq
 OPENDQ_PATH = $(NET_PATH)/$(OPENDQ_NAME)
 INC_PATH += -I $(OPENDQ_PATH)
 VPATH += $(OPENDQ_PATH)
-ifeq ($(USE_OPENDQ), TRUE)
+ifeq ($(USE_NET_OPENDQ), TRUE)
     include $(OPENDQ_PATH)/Makefile.include
 endif
 
