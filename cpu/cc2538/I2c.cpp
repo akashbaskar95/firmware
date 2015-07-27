@@ -11,9 +11,6 @@
 
 /*================================ include ==================================*/
 
-#include "cpu_include.h"
-#include "cpu_types.h"
-
 #include "Board.h"
 #include "I2c.h"
 

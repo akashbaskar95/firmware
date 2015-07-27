@@ -11,9 +11,6 @@
 
 /*================================ include ==================================*/
 
-#include "cpu_include.h"
-#include "cpu_types.h"
-
 #include "RadioTimer.h"
 #include "InterruptHandler.h"
 

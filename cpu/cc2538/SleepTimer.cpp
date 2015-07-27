@@ -11,9 +11,6 @@
 
 /*================================ include ==================================*/
 
-#include "cpu_include.h"
-#include "cpu_types.h"
-
 #include "SleepTimer.h"
 #include "InterruptHandler.h"
 

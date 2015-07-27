@@ -11,9 +11,6 @@
 
 /*================================ include ==================================*/
 
-#include "cpu_include.h"
-#include "cpu_types.h"
-
 #include "Gpio.h"
 
 /*================================ define ===================================*/
@@ -26,8 +23,8 @@
 
 /*================================= public ==================================*/
 
-GpioPwm::GpioPwm(Gpio_TypeDef& gpio):
-    gpio_(gpio)
+GpioPwm::GpioPwm(const Gpio_TypeDef& gpio):
+    Gpio(gpio)
 {
 }
 

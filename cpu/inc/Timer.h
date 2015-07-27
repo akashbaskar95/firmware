@@ -14,6 +14,9 @@
 
 #include <stdint.h>
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Callback.h"
 
 class Timer
@@ -22,7 +25,7 @@ class Timer
 friend class InterruptHandler;
 
 public:
-    Timer(uint32_t peripheral, uint32_t base, uint32_t source, uint32_t config, uint32_t interrupt, uint32_t interrupt_mode);
+    Timer(Timer_TypeDef& timer);
     uint32_t getBase(void);
     uint32_t getSource(void);
     void init(uint32_t frequency);
@@ -36,12 +39,8 @@ public:
 protected:
     void interruptHandler(void);
 private:
-    uint32_t peripheral_;
-    uint32_t base_;
-    uint32_t source_;
-    uint32_t config_;
-    uint32_t interrupt_;
-    uint32_t interrupt_mode_;
+    Timer_TypeDef& timer_;
+    
     uint32_t frequency_;
 
     Callback* callback_;

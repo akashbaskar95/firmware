@@ -14,13 +14,14 @@
 
 #include <stdint.h>
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 #include "Gpio.h"
 #include "Callback.h"
 #include "Mutex.h"
 
 class Gpio;
-
-struct I2c_TypeDef;
 
 class I2c
 {

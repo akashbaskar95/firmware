@@ -62,13 +62,10 @@ MAKEFLAGS = -j1
 ###############################################################################
 
 # Append to the files to compile
-# SRC_FILES += Board.cpp InterruptHandler.cpp Gpio.cpp GpioAdc.cpp GpioIn.cpp \
-#              GpioInPow.cpp GpioOut.cpp GpioUart.cpp GpioI2c.cpp GpioSpi.cpp \
-#              Uart.cpp I2c.cpp Spi.cpp Timer.cpp GpioPwm.cpp Radio.cpp Watchdog.cpp \
-#              SysTick.cpp SleepTimer.cpp RadioTimer.cpp
-
-SRC_FILES += Board.cpp Gpio.cpp GpioAdc.cpp GpioIn.cpp GpioInPow.cpp GpioOut.cpp \
-             GpioUart.cpp GpioI2c.cpp GpioSpi.cpp InterruptHandler.cpp I2c.cpp Radio.cpp Spi.cpp Uart.cpp
+SRC_FILES += Board.cpp InterruptHandler.cpp Gpio.cpp GpioAdc.cpp GpioIn.cpp \
+             GpioInPow.cpp GpioOut.cpp GpioUart.cpp GpioI2c.cpp GpioSpi.cpp \
+             Uart.cpp I2c.cpp Spi.cpp Timer.cpp GpioPwm.cpp Radio.cpp Watchdog.cpp \
+             SysTick.cpp SleepTimer.cpp RadioTimer.cpp
 
 # Append the startup code to the files to compile
 SRC_FILES += cc2538_startup.c cc2538_system.c

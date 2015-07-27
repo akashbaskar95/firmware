@@ -53,6 +53,23 @@ struct Spi_TypeDef
     Spi_Interrupt_TypeDef interrupt;
 };
 
+typedef uint32_t Timer_Periph_TypeDef;
+typedef uint32_t Timer_Base_TypeDef;
+typedef uint32_t Timer_Source_TypeDef;
+typedef uint32_t Timer_Config_TypeDef;
+typedef uint32_t Timer_Interrupt_TypeDef;
+typedef uint32_t Timer_InterruptMode_TypeDef;
+
+struct Timer_TypeDef
+{
+    Timer_Periph_TypeDef        peripheral;
+    Timer_Base_TypeDef          base;
+    Timer_Source_TypeDef        source;
+    Timer_Config_TypeDef        config;
+    Timer_Interrupt_TypeDef     interrupt;
+    Timer_InterruptMode_TypeDef interrupt_mode;
+};
+
 typedef uint32_t Uart_Periph_TypeDef;
 typedef uint32_t Uart_Base_TypeDef;
 typedef uint32_t Uart_Clock_TypeDef;

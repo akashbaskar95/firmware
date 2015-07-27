@@ -13,9 +13,6 @@
 
 #include <string.h>
 
-#include "cpu_include.h"
-#include "cpu_types.h"
-
 #include "Board.h"
 #include "Gpio.h"
 

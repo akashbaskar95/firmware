@@ -14,9 +14,10 @@
 
 #include <stdint.h>
 
-#include "Callback.h"
+#include "cpu_include.h"
+#include "cpu_types.h"
 
-typedef struct Gpio_TypeDef Gpio_TypeDef;
+#include "Callback.h"
 
 class Gpio
 {

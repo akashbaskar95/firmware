@@ -12,6 +12,9 @@
 #ifndef INTERRUPT_HANDLER_H_
 #define INTERRUPT_HANDLER_H_
 
+#include "cpu_include.h"
+#include "cpu_types.h"
+
 class GpioIn;
 class GpioInPow;
 class Timer;
