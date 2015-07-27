@@ -21,12 +21,12 @@
 #include "Gpio.h"
 #include "I2c.h"
 #include "Radio.h"
-// #include "RadioTimer.h"
-// #include "SleepTimer.h"
+#include "RadioTimer.h"
+#include "SleepTimer.h"
 #include "Spi.h"
-// #include "Timer.h"
+#include "Timer.h"
 #include "Uart.h"
-// #include "Watchdog.h"
+#include "Watchdog.h"
 
 #include "Adxl346.h"
 #include "Max44009.h"
@@ -171,7 +171,7 @@
 
 // Board management
 extern Board board;
-// extern Watchdog watchdog;
+extern Watchdog watchdog;
 
 // Step-down DC/DC converter
 extern Tps62730 tps62730;
@@ -195,16 +195,16 @@ extern GpioInPow button_user;
 // extern GpioOut antenna_internal;
 
 // Timer
-// extern Timer timer0;
-// extern Timer timer1;
-// extern Timer timer2;
-// extern Timer timer3;
+extern Timer timer0;
+extern Timer timer1;
+extern Timer timer2;
+extern Timer timer3;
 
 // SleepTimer
-// extern SleepTimer sleepTimer;
+extern SleepTimer sleepTimer;
 
 // RadioTimer
-// extern RadioTimer radioTimer;
+extern RadioTimer radioTimer;
 
 // I2C peripheral
 extern I2c i2c;

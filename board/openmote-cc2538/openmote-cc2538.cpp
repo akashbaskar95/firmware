@@ -51,7 +51,7 @@ Gpio_TypeDef gpio_enc28j60_data = {ENC28J60_INT_PORT, ENC28J60_INT_PIN, ENC28J60
 
 // Board management
 Board board;
-// Watchdog watchdog(WATCHDOG_INTERVAL);
+Watchdog watchdog(WATCHDOG_INTERVAL);
 
 // Debug pins
 GpioOut debug_ad0(debug_ad0_data);
@@ -68,16 +68,21 @@ GpioOut led_yellow(led_yellow_data);
 GpioInPow button_user(button_user_data);
 
 // Timer
-// Timer timer0(TIMER0_PERIPHERAL, TIMER0_BASE, TIMER0_SOURCE, TIMER0_CONFIG, TIMER0_INTERRUPT, TIMER0_INTERRUPT_MODE);
-// Timer timer1(TIMER1_PERIPHERAL, TIMER1_BASE, TIMER1_SOURCE, TIMER1_CONFIG, TIMER1_INTERRUPT, TIMER1_INTERRUPT_MODE);
-// Timer timer2(TIMER2_PERIPHERAL, TIMER2_BASE, TIMER2_SOURCE, TIMER2_CONFIG, TIMER2_INTERRUPT, TIMER2_INTERRUPT_MODE);
-// Timer timer3(TIMER3_PERIPHERAL, TIMER3_BASE, TIMER3_SOURCE, TIMER3_CONFIG, TIMER3_INTERRUPT, TIMER3_INTERRUPT_MODE);
+Timer_TypeDef timer0_data = {TIMER0_PERIPHERAL, TIMER0_BASE, TIMER0_SOURCE, TIMER0_CONFIG, TIMER0_INTERRUPT, TIMER0_INTERRUPT_MODE};
+Timer_TypeDef timer1_data = {TIMER1_PERIPHERAL, TIMER1_BASE, TIMER1_SOURCE, TIMER1_CONFIG, TIMER1_INTERRUPT, TIMER1_INTERRUPT_MODE};
+Timer_TypeDef timer2_data = {TIMER2_PERIPHERAL, TIMER2_BASE, TIMER2_SOURCE, TIMER2_CONFIG, TIMER2_INTERRUPT, TIMER2_INTERRUPT_MODE};
+Timer_TypeDef timer3_data = {TIMER3_PERIPHERAL, TIMER3_BASE, TIMER3_SOURCE, TIMER3_CONFIG, TIMER3_INTERRUPT, TIMER3_INTERRUPT_MODE};
+
+Timer timer0(timer0_data);
+Timer timer1(timer1_data);
+Timer timer2(timer2_data);
+Timer timer3(timer3_data);
 
 // SleepTimer
-// SleepTimer sleepTimer(SLEEP_TIMER_INTERRUPT);
+SleepTimer sleepTimer(SLEEP_TIMER_INTERRUPT);
 
 // RadioTimer
-// RadioTimer radioTimer(RADIO_TIMER_INTERRUPT);
+RadioTimer radioTimer(RADIO_TIMER_INTERRUPT);
 
 // I2C peripheral
 GpioI2c i2c_scl(i2c_scl_data);
@@ -136,3 +141,4 @@ Enc28j60 enc28j60(spi, enc28j60_int);
 /*================================= public ==================================*/
 
 /*================================ private ==================================*/
+
