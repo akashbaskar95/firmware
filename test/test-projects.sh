@@ -4,15 +4,18 @@ HOME=".."
 PROJECTS="test"
 TEST="test"
 
-MAKE_COMMAND="make TARGET=cc2538 BOARD=openmote-cc2538"
-CLEAN_COMMAND="make TARGET=cc2538 BOARD=openmote-cc2538 clean"
+MAKE_COMMAND="make BOARD=openmote-cc2538"
+CLEAN_COMMAND="make BOARD=openmote-cc2538 clean"
 
 cd $HOME
 HOME=$(pwd)
 
 cd $PROJECTS
+
+ERROR=false
+
 for PROJECT in *; do
-    if [[ -d $PROJECT ]]; then
+    if [ -d "$PROJECT" ] && [ "$ERROR" == false ]; then
         
         cd $PROJECT
         
@@ -29,10 +32,12 @@ for PROJECT in *; do
             ERROR=true
         else
             echo -e "ok!"
+            ERROR=false
         fi
         
-        cd $HOME/$PROJECTS
+        OUTPUT=$($CLEAN_COMMAND 2>&1)
         
+        cd $HOME/$TEST
     fi
 done
 
