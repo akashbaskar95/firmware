@@ -36,20 +36,20 @@ MutexRecursive::~MutexRecursive()
 
 bool MutexRecursive::take(void)
 {
-    return false;
+    bool status = (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) == pdTRUE);
+    return status;
 }
 
 bool MutexRecursive::take(uint32_t milliseconds)
 {
-    return false;
+    TickType_t timeout = milliseconds / portTICK_RATE_MS;
+    bool status = (xSemaphoreTakeRecursive(mutex_, timeout) == pdTRUE);
+    return status;
 }
 
 void MutexRecursive::give(void)
 {
-}
-
-void MutexRecursive::giveFromInterrupt(void)
-{
+    xSemaphoreGiveRecursive(mutex_);
 }
 
 /*=============================== protected =================================*/

@@ -15,8 +15,7 @@
 
 #include <stdint.h>
 
-#include "FreeRTOS.h"
-#include "semphr.h"
+#include "Mutex.h"
 
 class Queue
 {
@@ -35,7 +34,7 @@ public:
 private:
     void empty(void);
 private:
-    SemaphoreHandle_t mutex_;
+    MutexRecursive rmutex_;
     uint8_t* buffer_;
     int32_t  length_;
     uint8_t* read_;

@@ -28,22 +28,18 @@
 CircularBuffer::CircularBuffer(uint8_t* buffer, uint32_t length):
     buffer_(buffer), length_(length), count_(0), head_(buffer), tail_(buffer)
 {
-    mutex_ = xSemaphoreCreateRecursiveMutex();
-    if (mutex_ == NULL) {
-        while (true);
-    }
 }
 
 void CircularBuffer::reset(void)
 {
     // Try to acquire the mutex
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) == pdTRUE)
+    if (rmutex_.take())
     {
         head_ = buffer_;
         tail_ = buffer_;
         count_ = 0;
 
-        xSemaphoreGiveRecursive(mutex_);
+        rmutex_.give();
     }
 }
 
@@ -51,7 +47,8 @@ bool CircularBuffer::isEmpty(void)
 {
     bool status;
 
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) != pdTRUE)
+    // Try to acquire the mutex
+    if (rmutex_.take())
     {
         while (true);
     }
@@ -60,7 +57,7 @@ bool CircularBuffer::isEmpty(void)
     status = (count_ == 0);
 
     // Free the mutex
-    xSemaphoreGiveRecursive(mutex_);
+    rmutex_.give();
 
     return status;
 }
@@ -69,7 +66,8 @@ bool CircularBuffer::isFull(void)
 {
     bool status;
 
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) != pdTRUE)
+    // Try to acquire the mutex
+    if (rmutex_.take())
     {
         while (true);
     }
@@ -78,7 +76,7 @@ bool CircularBuffer::isFull(void)
     status = (count_ == length_);
 
     // Free the mutex
-    xSemaphoreGiveRecursive(mutex_);
+    rmutex_.give();
 
     return status;
 }
@@ -87,7 +85,8 @@ uint32_t CircularBuffer::getSize(void)
 {
     uint32_t count;
 
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) != pdTRUE)
+    // Try to acquire the mutex
+    if (rmutex_.take())
     {
         while (true);
     }
@@ -96,7 +95,7 @@ uint32_t CircularBuffer::getSize(void)
     count = count_;
 
     // Free the mutex
-    xSemaphoreGiveRecursive(mutex_);
+    rmutex_.give();
 
     return count;
 }
@@ -104,7 +103,7 @@ uint32_t CircularBuffer::getSize(void)
 bool CircularBuffer::read(uint8_t* data)
 {
     // Try to acquire the mutex
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) != pdTRUE)
+    if (rmutex_.take())
     {
         while (true);
     }
@@ -117,7 +116,7 @@ bool CircularBuffer::read(uint8_t* data)
         count_ -= 1;
 
         // Free the mutex
-        xSemaphoreGiveRecursive(mutex_);
+        rmutex_.give();
 
         // Return success
         return true;
@@ -125,7 +124,7 @@ bool CircularBuffer::read(uint8_t* data)
     else
     {
         // Free the mutex
-        xSemaphoreGiveRecursive(mutex_);
+        rmutex_.give();
 
         // Return error
         return false;
@@ -155,7 +154,7 @@ bool CircularBuffer::read(uint8_t* buffer, uint32_t length)
 bool CircularBuffer::write(uint8_t data)
 {
     // Try to acquire the mutex
-    if (xSemaphoreTakeRecursive(mutex_, portMAX_DELAY) != pdTRUE)
+    if (rmutex_.take())
     {
         while (true);
     }
@@ -168,7 +167,7 @@ bool CircularBuffer::write(uint8_t data)
         count_ += 1;
 
         // Free the mutex
-        xSemaphoreGiveRecursive(mutex_);
+        rmutex_.give();
 
         // Return success
         return true;
@@ -176,7 +175,7 @@ bool CircularBuffer::write(uint8_t data)
     else
     {
         // Free the mutex
-        xSemaphoreGiveRecursive(mutex_);
+        rmutex_.give();
 
         // Return error
         return false;

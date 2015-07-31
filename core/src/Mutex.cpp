@@ -53,7 +53,7 @@ void Mutex::give(void)
 
 void Mutex::giveFromInterrupt(void)
 {
-    priorityTaskWoken_ = pdFALSE;
+    BaseType_t priorityTaskWoken_ = pdFALSE;
     xSemaphoreGiveFromISR(mutex_, &priorityTaskWoken_);
     portYIELD_FROM_ISR(priorityTaskWoken_);
 }
