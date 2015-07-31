@@ -108,7 +108,8 @@ uint32_t Serial::read(uint8_t* buffer, uint32_t size)
     if (length <= size)
     {
         // Copy all bytes to the buffer except the CRC bytes
-        while (size--) {
+        while (size--)
+        {
             rxBuffer_.read(&data);
             *buffer++ = data;
         }
