@@ -23,6 +23,19 @@ DOPTIONS += -DNO_CLOCK_DIVIDER_RESTORE
 
 ###############################################################################
 
+CPU_PREFIX = arm-none-eabi
+
+# Toolchain executables
+CC      = $(CPU_PREFIX)-gcc
+CPP     = $(CPU_PREFIX)-g++
+AS      = $(CPU_PREFIX)-as
+LD      = $(CPU_PREFIX)-ld
+GDB     = $(CPU_PREFIX)-gdb
+OBJCOPY = $(CPU_PREFIX)-objcopy
+OBJSIZE = $(CPU_PREFIX)-size
+
+###############################################################################
+
 # C compiling flags
 CFLAGS += -mthumb -mcpu=cortex-m3 -mlittle-endian
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing

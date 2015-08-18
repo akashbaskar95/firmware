@@ -1,16 +1,5 @@
 ###############################################################################
 
-# Toolchain executables
-CC = arm-none-eabi-gcc
-CPP = arm-none-eabi-g++
-AS = arm-none-eabi-as
-LD = arm-none-eabi-ld
-GDB = arm-none-eabi-gdb
-OBJCOPY = arm-none-eabi-objcopy
-OBJSIZE = arm-none-eabi-size
-
-###############################################################################
-
 #define the board subdirectory
 BOARD_NAME = board
 BOARD_PATH = $(PROJECT_HOME)/$(BOARD_NAME)
