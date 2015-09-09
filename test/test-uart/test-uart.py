@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 '''
-@file       test-uart.py
+@file       test-serial.py
 @author     Pere Tuset-Peiro  (peretuset@openmote.com)
 @version    v0.1
 @date       May, 2015
@@ -11,15 +11,30 @@
             This file is licensed under the GNU General Public License v2.
 '''
 
-import os, sys
-
-library_path = os.path.abspath('../../library')
-sys.path.append(lib_path)
-
-import Serial
+import serial
+import struct
+import os
 
 def program():
-    print "Hello world!"
+    ser = serial.Serial(port     = '/dev/ttyO1',
+                        baudrate = 115200,
+                        parity   = serial.PARITY_NONE,
+                        stopbits = serial.STOPBITS_ONE,
+                        bytesize = serial.EIGHTBITS,
+                        xonxoff  = False,
+                        rtscts   = False,
+                        dsrdtr   = False)
+                        
+    
+    buff = list()
+    while(True):
+        data = struct.unpack("1b", ser.read(1))[0]
+        c = chr(data)
+        if (c == '\n'):
+	    print(''.join(buff))
+            buff = list()
+        else:
+            buff.append(c)
 
 def main():
     program()
