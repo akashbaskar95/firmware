@@ -31,7 +31,7 @@ static void prvUartTask(void *pvParameters);
 
 /*=============================== variables =================================*/
 
-uint8_t uart_buffer[] = {'O','p','e','n','M','o','t','e','-','C','C','2','5','3','8','\r','\n'};
+uint8_t uart_buffer[] = {'O','p','e','n','M','o','t','e','-','C','C','2','5','3','8','\n'};
 uint8_t* uart_ptr = uart_buffer;
 uint8_t uart_len  = sizeof(uart_buffer);
 
@@ -46,7 +46,7 @@ int main (void)
     board.enableFlashErase();
 
     // Enable the UART peripheral and the serial driver
-    uart.enable(UART_BAUDRATE, UART_CONFIG, UART_INT_MODE);
+    uart0.enable(UART0_BAUDRATE, UART0_CONFIG, UART0_INT_MODE);
 
     // Create two FreeRTOS tasks
     xTaskCreate(prvGreenLedTask, (const char *) "Green", 128, NULL, GREEN_LED_TASK_PRIORITY, NULL);
@@ -72,7 +72,7 @@ static void prvUartTask(void *pvParameters)
         led_red.on();
 
         // Print buffer via UART
-        uart.writeByte(uart_ptr, uart_len);
+        uart0.writeByte(uart_ptr, uart_len);
 
         // Turn off red LED
         led_red.off();

@@ -73,7 +73,7 @@ int main (void)
     board.enableFlashErase();
 
     // Enable the UART interface
-    uart.enable(UART_BAUDRATE, UART_CONFIG, UART_INT_MODE);
+    uart0.enable(UART0_BAUDRATE, UART0_CONFIG, UART0_INT_MODE);
 
     // Configure the IEEE 802.15.4 radio
     radio.setTxCallbacks(&txInitCallback, &txDoneCallback);
@@ -146,7 +146,7 @@ static void prvRadioRxTask(void *pvParameters)
             if (result == RadioResult_Success && crc)
             {
                 // Transmit the RSSI byte over the UART
-                uart.writeByte(rssi);
+                uart0.writeByte(rssi);
             }
 
             // Turn off the radio until the next packet

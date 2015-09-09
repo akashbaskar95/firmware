@@ -33,7 +33,7 @@ static void prvSerialTask(void *pvParameters);
 
 /*=============================== variables =================================*/
 
-uint8_t serial_tx_buffer[] = {'O','p','e','n','M','o','t','e','-','C','C','2','5','3','8'};
+uint8_t serial_tx_buffer[] = {'O','p','e','n','M','o','t','e','-','C','C','2','5','3','8','\n'};
 uint8_t* serial_tx_ptr = serial_tx_buffer;
 uint8_t serial_tx_len  = sizeof(serial_tx_buffer);
 
@@ -41,7 +41,7 @@ uint8_t serial_rx_buffer[128];
 uint8_t* serial_rx_ptr = serial_rx_buffer;
 uint8_t serial_rx_len  = sizeof(serial_rx_buffer);
 
-Serial serial(uart);
+Serial serial(uart0);
 
 /*================================= public ==================================*/
 
@@ -54,7 +54,7 @@ int main (void)
     board.enableFlashErase();
 
     // Enable the UART peripheral and the serial driver
-    uart.enable(UART_BAUDRATE, UART_CONFIG, UART_INT_MODE);
+    uart0.enable(UART0_BAUDRATE, UART0_CONFIG, UART0_INT_MODE);
     serial.init();
 
     // Create two FreeRTOS tasks

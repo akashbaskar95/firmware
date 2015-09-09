@@ -73,7 +73,7 @@ static uint8_t uart_buffer[PAYLOAD_LENGTH];
 static uint8_t* uart_ptr = uart_buffer;
 static uint8_t  uart_len = sizeof(radio_buffer);
 
-static Serial serial(uart);
+static Serial serial(uart0);
 
 /*================================= public ==================================*/
 
@@ -97,7 +97,7 @@ int main (void)
 
 #if (RADIO_MODE == RADIO_MODE_RX)
     // Enable the UART driver and Serial device
-    uart.enable(UART_BAUDRATE, UART_CONFIG, UART_INT_MODE);
+    uart0.enable(UART0_BAUDRATE, UART0_CONFIG, UART0_INT_MODE);
     serial.init();
 
     // Create the radio receive task
