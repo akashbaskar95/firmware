@@ -78,11 +78,9 @@ private:
     static Timer* TIMER1_interruptVector_[2];
     static Timer* TIMER2_interruptVector_[2];
     static Timer* TIMER3_interruptVector_[2];
-    static Uart* UART0_interruptVector_;
-    static Uart* UART1_interruptVector_;
+    static Uart* UART_interruptVector_[2];
     static I2c* I2C_interruptVector_;
-    static Spi* SPI0_interruptVector_;
-    static Spi* SPI1_interruptVector_;
+    static Spi* SPI_interruptVector_[2];
     static SysTick* SysTick_interruptVector_;
     static Radio* Radio_interruptVector_;
     static SleepTimer* SleepTimer_interruptVector_;

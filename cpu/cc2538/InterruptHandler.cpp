@@ -44,13 +44,11 @@ Timer* InterruptHandler::TIMER3_interruptVector_[2];
 SleepTimer* InterruptHandler::SleepTimer_interruptVector_;
 RadioTimer* InterruptHandler::RadioTimer_interruptVector_;
 
-Uart* InterruptHandler::UART0_interruptVector_;
-Uart* InterruptHandler::UART1_interruptVector_;
+Uart* InterruptHandler::UART_interruptVector_[2];
 
 I2c* InterruptHandler::I2C_interruptVector_;
 
-Spi* InterruptHandler::SPI0_interruptVector_;
-Spi* InterruptHandler::SPI1_interruptVector_;
+Spi* InterruptHandler::SPI_interruptVector_[2];
 
 SysTick* InterruptHandler::SysTick_interruptVector_;
 
@@ -309,11 +307,11 @@ void InterruptHandler::setInterruptHandler(Uart * uart_)
     // Store a pointer to the UART object in the interrupt vector
     if (base == UART0_BASE)
     {
-        UART0_interruptVector_ = uart_;
+        UART_interruptVector_[0] = uart_;
     }
     else if (base == UART1_BASE)
     {
-        UART1_interruptVector_ = uart_;
+        UART_interruptVector_[1] = uart_;
     }
 }
 
@@ -325,11 +323,11 @@ void InterruptHandler::clearInterruptHandler(Uart * uart_)
     // Remove the pointer to the UART object in the interrupt vector
     if (base == UART0_BASE)
     {
-        UART0_interruptVector_ = nullptr;
+        UART_interruptVector_[0] = nullptr;
     }
     else if (base == UART1_BASE)
     {
-        UART1_interruptVector_ = nullptr;
+        UART_interruptVector_[1] = nullptr;
     }
 }
 
@@ -353,11 +351,11 @@ void InterruptHandler::setInterruptHandler(Spi * spi_)
     // Store a pointer to the UART object in the interrupt vector
     if (base == SSI0_BASE)
     {
-        SPI0_interruptVector_ = spi_;
+        SPI_interruptVector_[0] = spi_;
     }
     else if (base == SSI1_BASE)
     {
-        SPI1_interruptVector_ = spi_;
+        SPI_interruptVector_[1] = spi_;
     }
 }
 
@@ -369,11 +367,11 @@ void InterruptHandler::clearInterruptHandler(Spi * spi_)
     // Remove the pointer to the UART object in the interrupt vector
     if (base == SSI0_BASE)
     {
-        SPI0_interruptVector_ = nullptr;
+        SPI_interruptVector_[0] = nullptr;
     }
     else if (base == SSI1_BASE)
     {
-        SPI1_interruptVector_ = nullptr;
+        SPI_interruptVector_[1] = nullptr;
     }
 }
 
@@ -388,7 +386,6 @@ void InterruptHandler::clearInterruptHandler(Radio * radio_)
     // Remove the pointer to the RADIO object in the interrupt vector
     Radio_interruptVector_ = nullptr;
 }
-
 
 void InterruptHandler::setInterruptHandler(SleepTimer * sleepTimer_)
 {
@@ -410,7 +407,6 @@ void InterruptHandler::clearInterruptHandler(RadioTimer * radioimer_)
     RadioTimer_interruptVector_ = nullptr;
 }
 
-
 /*=============================== protected =================================*/
 
 /*================================ private ==================================*/
@@ -418,7 +414,7 @@ void InterruptHandler::clearInterruptHandler(RadioTimer * radioimer_)
 InterruptHandler::InterruptHandler()
 {
     // Registher the SysTick interrupt handler
-    SysTickIntRegister(SysTick_InterruptHandler);
+    // SysTickIntRegister(SysTick_InterruptHandler);
 
     // Register the GPIO interrupt handlers
     GPIOPortIntRegister(GPIO_A_BASE, GPIOA_InterruptHandler);
@@ -793,14 +789,15 @@ inline void InterruptHandler::TIMER3_InterruptHandler(void)
 
 inline void InterruptHandler::UART0_InterruptHandler(void)
 {
+    
     // Call the UART interrupt handler
-    UART0_interruptVector_->interruptHandler();
+    UART_interruptVector_[0]->interruptHandler();
 }
 
 inline void InterruptHandler::UART1_InterruptHandler(void)
 {
     // Call the UART interrupt handler
-    UART1_interruptVector_->interruptHandler();
+    UART_interruptVector_[1]->interruptHandler();
 }
 
 inline void InterruptHandler::I2C_InterruptHandler(void)
@@ -812,13 +809,13 @@ inline void InterruptHandler::I2C_InterruptHandler(void)
 inline void InterruptHandler::SPI0_InterruptHandler(void)
 {
     // Call the SPI interrupt handler
-    SPI0_interruptVector_->interruptHandler();
+    SPI_interruptVector_[0]->interruptHandler();
 }
 
 inline void InterruptHandler::SPI1_InterruptHandler(void)
 {
     // Call the SPI interrupt handler
-    SPI1_interruptVector_->interruptHandler();
+    SPI_interruptVector_[1]->interruptHandler();
 }
 
 inline void InterruptHandler::SysTick_InterruptHandler(void)

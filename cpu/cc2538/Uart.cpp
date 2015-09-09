@@ -148,7 +148,7 @@ uint32_t Uart::readByte(uint8_t * buffer, uint32_t length)
     }
 
     // Wait until it is complete
-    while(UARTBusy(uart_.base))
+    while (UARTBusy(uart_.base))
         ;
 
     return 0;
