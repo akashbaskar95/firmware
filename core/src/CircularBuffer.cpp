@@ -48,7 +48,7 @@ bool CircularBuffer::isEmpty(void)
     bool status;
 
     // Try to acquire the mutex
-    if (rmutex_.take())
+    if (rmutex_.take() == false)
     {
         while (true);
     }
@@ -67,7 +67,7 @@ bool CircularBuffer::isFull(void)
     bool status;
 
     // Try to acquire the mutex
-    if (rmutex_.take())
+    if (rmutex_.take() == false)
     {
         while (true);
     }
@@ -86,7 +86,7 @@ uint32_t CircularBuffer::getSize(void)
     uint32_t count;
 
     // Try to acquire the mutex
-    if (rmutex_.take())
+    if (rmutex_.take() == false)
     {
         while (true);
     }
@@ -103,7 +103,7 @@ uint32_t CircularBuffer::getSize(void)
 bool CircularBuffer::read(uint8_t* data)
 {
     // Try to acquire the mutex
-    if (rmutex_.take())
+    if (rmutex_.take() == false)
     {
         while (true);
     }
@@ -154,7 +154,7 @@ bool CircularBuffer::read(uint8_t* buffer, uint32_t length)
 bool CircularBuffer::write(uint8_t data)
 {
     // Try to acquire the mutex
-    if (rmutex_.take())
+    if (rmutex_.take() == false)
     {
         while (true);
     }
