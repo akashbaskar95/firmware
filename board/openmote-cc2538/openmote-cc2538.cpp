@@ -37,9 +37,13 @@ Gpio_TypeDef i2c_scl_data = {I2C_BASE, I2C_SCL};
 Gpio_TypeDef i2c_sda_data = {I2C_BASE, I2C_SDA};
 I2c_TypeDef i2c_data      = {I2C_PERIPHERAL};
 
-Gpio_TypeDef gpio_uart_rx_data = {UART_RX_PORT, UART_RX_PIN, 0, UART_RX_IOC};
-Gpio_TypeDef gpio_uart_tx_data = {UART_TX_PORT, UART_TX_PIN, 0, UART_TX_IOC};
-Uart_TypeDef uart_data         = {UART_PERIPHERAL, UART_BASE, UART_CLOCK, UART_INTERRUPT};
+Gpio_TypeDef gpio_uart0_rx_data = {UART0_RX_PORT, UART0_RX_PIN, 0, UART0_RX_IOC};
+Gpio_TypeDef gpio_uart0_tx_data = {UART0_TX_PORT, UART0_TX_PIN, 0, UART0_TX_IOC};
+Uart_TypeDef uart0_data         = {UART0_PERIPHERAL, UART0_BASE_, UART0_CLOCK, UART0_INTERRUPT};
+
+Gpio_TypeDef gpio_uart1_rx_data = {UART1_RX_PORT, UART1_RX_PIN, 0, UART1_RX_IOC};
+Gpio_TypeDef gpio_uart1_tx_data = {UART1_TX_PORT, UART1_TX_PIN, 0, UART1_TX_IOC};
+Uart_TypeDef uart1_data         = {UART1_PERIPHERAL, UART1_BASE_, UART1_CLOCK, UART1_INTERRUPT};
 
 Gpio_TypeDef gpio_spi_miso = {SPI_MISO_BASE, SPI_MISO_PIN, 0, SPI_MISO_IOC};
 Gpio_TypeDef gpio_spi_mosi = {SPI_MOSI_BASE, SPI_MOSI_PIN, 0, SPI_MOSI_IOC};
@@ -97,9 +101,13 @@ GpioSpi spi_ncs(gpio_spi_ncs);
 Spi spi(spi_data, spi_miso, spi_mosi, spi_clk, spi_ncs);
 
 // UART peripheral
-GpioUart gpio_uart_rx(gpio_uart_rx_data);
-GpioUart gpio_uart_tx(gpio_uart_tx_data);
-Uart uart(uart_data, gpio_uart_rx, gpio_uart_tx);
+GpioUart gpio_uart0_rx(gpio_uart0_rx_data);
+GpioUart gpio_uart0_tx(gpio_uart0_tx_data);
+Uart uart0(uart0_data, gpio_uart0_rx, gpio_uart0_tx);
+
+GpioUart gpio_uart1_rx(gpio_uart1_rx_data);
+GpioUart gpio_uart1_tx(gpio_uart1_tx_data);
+Uart uart1(uart1_data, gpio_uart1_rx, gpio_uart1_tx);
 
 // IEEE 802.15.4 radio
 Radio radio;

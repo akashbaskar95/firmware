@@ -112,19 +112,33 @@
 #define ANTENNA_INTERNAL_PORT   ( GPIO_D_BASE )
 #define ANTENNA_INTERNAL_PIN    ( GPIO_PIN_5 )
 
-#define UART_PERIPHERAL         ( SYS_CTRL_PERIPH_UART0 )
-#define UART_BASE               ( UART0_BASE )
-#define UART_CLOCK              ( UART_CLOCK_PIOSC )
-#define UART_INTERRUPT          ( INT_UART0 )
-#define UART_RX_PORT            ( GPIO_A_BASE )
-#define UART_RX_PIN             ( GPIO_PIN_0 )
-#define UART_RX_IOC             ( IOC_UARTRXD_UART0 )
-#define UART_TX_PORT            ( GPIO_A_BASE )
-#define UART_TX_PIN             ( GPIO_PIN_1 )
-#define UART_TX_IOC             ( IOC_MUX_OUT_SEL_UART0_TXD )
-#define UART_BAUDRATE           ( 115200 )
-#define UART_CONFIG             ( UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE )
-#define UART_INT_MODE           ( UART_TXINT_MODE_EOT )
+#define UART0_PERIPHERAL        ( SYS_CTRL_PERIPH_UART0 )
+#define UART0_BASE_             ( UART0_BASE )
+#define UART0_CLOCK             ( UART_CLOCK_PIOSC )
+#define UART0_INTERRUPT         ( INT_UART0 )
+#define UART0_RX_PORT           ( GPIO_A_BASE )
+#define UART0_RX_PIN            ( GPIO_PIN_0 )
+#define UART0_RX_IOC            ( IOC_UARTRXD_UART0 )
+#define UART0_TX_PORT           ( GPIO_A_BASE )
+#define UART0_TX_PIN            ( GPIO_PIN_1 )
+#define UART0_TX_IOC            ( IOC_MUX_OUT_SEL_UART0_TXD )
+#define UART0_BAUDRATE          ( 115200 )
+#define UART0_CONFIG            ( UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE )
+#define UART0_INT_MODE          ( UART_TXINT_MODE_EOT )
+
+#define UART1_PERIPHERAL        ( SYS_CTRL_PERIPH_UART1 )
+#define UART1_BASE_             ( UART1_BASE )
+#define UART1_CLOCK             ( UART_CLOCK_PIOSC )
+#define UART1_INTERRUPT         ( INT_UART1 )
+#define UART1_RX_PORT           ( GPIO_A_BASE )
+#define UART1_RX_PIN            ( GPIO_PIN_0 )
+#define UART1_RX_IOC            ( IOC_UARTRXD_UART1 )
+#define UART1_TX_PORT           ( GPIO_A_BASE )
+#define UART1_TX_PIN            ( GPIO_PIN_1 )
+#define UART1_TX_IOC            ( IOC_MUX_OUT_SEL_UART1_TXD )
+#define UART1_BAUDRATE          ( 115200 )
+#define UART1_CONFIG            ( UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE )
+#define UART1_INT_MODE          ( UART_TXINT_MODE_EOT )
 
 #define SPI_PERIPHERAL          ( SYS_CTRL_PERIPH_SSI0 )
 #define SPI_BASE                ( SSI0_BASE )
@@ -213,7 +227,8 @@ extern I2c i2c;
 extern Spi spi;
 
 // UART peripheral
-extern Uart uart;
+extern Uart uart0;
+extern Uart uart1;
 
 // IEEE 802.15.4 radio
 extern Radio radio;
