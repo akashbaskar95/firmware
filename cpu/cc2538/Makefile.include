@@ -94,9 +94,9 @@ LINKER_LIBS += -lcc2538
 
 # Check if BSL has been defined, if not give it a default value
 ifndef BSL
-BSL_BOARD = openbase
+BSL = openbase
 else
-BSL_BOARD = $(BSL)
+BSL = $(BSL)
 endif
 
 ###############################################################################
