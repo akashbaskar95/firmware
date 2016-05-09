@@ -20,17 +20,21 @@ def rename_files(folder, extension):
     result = []
     print("Renaming files..."),
     for filename in os.listdir(folder):
-        name_, extension_ = filename.split(".")
-        if ((extension_ == extension)):
-            processed = name_.endswith("_")
-            if (not processed):
-                name = name_ + "_." + extension_
-                src = os.path.join(folder, filename)
-                dst = os.path.join(folder, name)
-                os.rename(src, dst)
-            else:
-                name = filename
-            result.append(name)
+        try:
+            name_, extension_ = filename.split(".")
+        except:
+            pass
+        else:
+            if ((extension_ == extension)):
+                processed = name_.endswith("_")
+                if (not processed):
+                    name = name_ + "_." + extension_
+                    src = os.path.join(folder, filename)
+                    dst = os.path.join(folder, name)
+                    os.rename(src, dst)
+                else:
+                    name = filename
+                result.append(name)
     print("ok!")
     return result
     
